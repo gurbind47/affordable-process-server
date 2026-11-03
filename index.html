@@ -202,6 +202,17 @@ footer { padding: calc(2 * var(--leading)) 0; font-size: 13px; line-height: var(
   .split { grid-template-columns: 1fr; }
   .split-figure { order: -1; }
 }
+.stats-rates-link { margin-top: calc(1.5 * var(--leading)); }
+
+/* — structured intake form (the system's own field/input/seg components —
+   the page's rhythm governs spacing around it, not inside the controls) — */
+.intake { padding: calc(2.5 * var(--leading)) 0; }
+.intake .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--leading) var(--leading); margin-top: var(--leading); max-width: 720px; }
+.intake .field-wide { grid-column: 1 / -1; }
+.intake .seg { flex-wrap: wrap; }
+.intake .actions { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; margin-top: var(--leading); }
+@media (max-width: 720px) { .intake .form-grid { grid-template-columns: 1fr; } }
 
 /* Review aid: the 28px rhythm drawn as hairlines — debug chrome, toggled by
    ?baselines or the B key, never part of the look. */
@@ -221,7 +232,7 @@ body[data-baselines]::after {
 </head>
 <body>
 <nav class="nav">
-  <span class="nav-brand">JSR Legals — Affordable Process Server</span>
+  <span class="nav-brand">JSR Legals</span>
   <a href="#product" aria-current="location">Services</a>
   <a href="#network">Coverage</a>
   <a href="#start">Contact</a>
@@ -233,7 +244,7 @@ body[data-baselines]::after {
     <h1 class="display"><span class="line">Served right.</span> <span class="line">Documented right.</span></h1>
     <p class="sub">Court document delivery for law firms and counsel across the GTA. Three service attempts included on every routine serve, a commissioned affidavit of service prepared the day service completes, and free document pickup from your office. Transparent flat fees — no per-kilometre metering, no attempt-count surprises, no hidden line items on your invoice.</p>
     <div class="row">
-      <a class="btn btn-primary" href="mailto:info@jsrlegals.ca">Email your documents</a>
+      <a class="btn btn-primary" href="#start">Request service</a>
       <a class="btn btn-ghost" href="tel:+14374434266">Call (437) 443-4266</a>
     </div>
   </section>
@@ -247,6 +258,7 @@ body[data-baselines]::after {
       <div><p class="stat-num">$185</p><p class="stat-label">Same-day serve — prioritized routing across the GTA</p></div>
       <div><p class="stat-num">$0</p><p class="stat-label">Mileage and document pickup — never metered, never billed separately</p></div>
     </div>
+    <div class="stats-rates-link"><a class="btn btn-secondary" href="assets/jsrlegals-rate-sheet.pdf" download>Download our rate sheet (PDF)</a></div>
   </section>
 
   <hr class="rule2" />
@@ -305,9 +317,67 @@ body[data-baselines]::after {
     </figure>
   </section>
 
+  <section class="intake" id="start">
+    <span class="kicker">Request service</span>
+    <h2 class="split-title">Send a structured request. We confirm by email the same business day.</h2>
+    <form class="form-grid" action="https://formsubmit.co/info@jsrlegals.ca" method="POST">
+      <input type="hidden" name="_subject" value="New service request — JSR Legals website" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" style="display:none" />
+      <div class="field">
+        <label for="firm">Firm / company name</label>
+        <input class="input" id="firm" name="Firm" type="text" required />
+      </div>
+      <div class="field">
+        <label for="contact">Contact name</label>
+        <input class="input" id="contact" name="Contact name" type="text" required />
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input class="input" id="email" name="Email" type="email" required />
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input class="input" id="phone" name="Phone" type="tel" />
+      </div>
+      <div class="field field-wide">
+        <label>Service requested</label>
+        <div class="seg" role="group" aria-label="Service requested">
+          <label class="seg-opt"><input type="radio" name="Service" value="Routine serve ($95)" checked />Routine $95</label>
+          <label class="seg-opt"><input type="radio" name="Service" value="Rush serve ($145)" />Rush $145</label>
+          <label class="seg-opt"><input type="radio" name="Service" value="Same-day serve ($185)" />Same-day $185</label>
+          <label class="seg-opt"><input type="radio" name="Service" value="Court filing" />Court filing</label>
+          <label class="seg-opt"><input type="radio" name="Service" value="Skip trace / locate" />Skip trace</label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="fileno">Court file / matter number</label>
+        <input class="input" id="fileno" name="Court file number" type="text" />
+      </div>
+      <div class="field">
+        <label for="deadline">Service deadline</label>
+        <input class="input" id="deadline" name="Deadline" type="date" />
+      </div>
+      <div class="field field-wide">
+        <label>Document pickup</label>
+        <label class="radio"><input type="radio" name="Pickup" value="Pick up from our office" checked /><span class="dot"></span>Pick up from our office</label>
+        &nbsp;&nbsp;
+        <label class="radio"><input type="radio" name="Pickup" value="Documents emailed" /><span class="dot"></span>We will email the documents</label>
+      </div>
+      <div class="field field-wide">
+        <label for="details">Details — party to be served, service address, anything we should know</label>
+        <textarea class="input" id="details" name="Details"></textarea>
+      </div>
+      <div class="actions field-wide">
+        <button class="btn btn-primary" type="submit">Send request</button>
+        <a class="btn btn-ghost" href="assets/jsrlegals-rate-sheet.pdf" download>Download our rate sheet (PDF)</a>
+      </div>
+    </form>
+  </section>
+
 </div>
 
-<section class="close" id="start">
+<section class="close">
   <div class="wrap">
     <h3><span class="line">Need it served this week?</span></h3>
     <div class="row">
@@ -318,7 +388,7 @@ body[data-baselines]::after {
 </section>
 
 <div class="wrap">
-  <footer>JSR Legals · Affordable Process Server · 42 Peace Valley Cres, Brampton, ON L6R 1G3 · <a href="tel:+14374434266">(437) 443-4266</a> · <a href="mailto:info@jsrlegals.ca">info@jsrlegals.ca</a> · Serving the GTA, Hamilton and Kitchener-Waterloo. Prices plus HST.</footer>
+  <footer>JSR Legals · 42 Peace Valley Cres, Brampton, ON L6R 1G3 · <a href="tel:+14374434266">(437) 443-4266</a> · <a href="mailto:info@jsrlegals.ca">info@jsrlegals.ca</a> · Serving the GTA, Hamilton and Kitchener-Waterloo. Prices plus HST.</footer>
 </div>
 <script src="image-slot.js"></script>
 <script>

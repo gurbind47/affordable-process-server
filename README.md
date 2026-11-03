@@ -1,5 +1,5 @@
-# Affordable Process Server
+# JSR Legals
 
-Static landing page for Affordable Process Server in Brampton, Ontario.
+Static landing page for JSR Legals — process serving and court support services in Brampton, Ontario, serving the GTA, Hamilton and Kitchener-Waterloo.
 
-Live site: https://gurbind47.github.io/affordable-process-server/
+Live site: https://gurbind47.github.io/jsrlegals/
