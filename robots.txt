@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gurbind47.github.io/affordable-process-server/sitemap.xml
